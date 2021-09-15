@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+// import Document from './documents'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <Document /> */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')
