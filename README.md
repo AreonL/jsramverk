@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/AreonL/jsramverk.svg?branch=master)](https://app.travis-ci.com/AreonL/jsramverk)
+
 # Ramverk JS React
 
 Dbwebb kurs JSRamverk
