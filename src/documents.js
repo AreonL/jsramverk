@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import { useAsync } from "react-use";
 
-const API_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document';
+// const API_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document';
+const API_URL = 'http://localhost:4000/document';
 
 function Document(props) {
     // console.log("name", props.new_text);
