@@ -20,7 +20,6 @@ function EditorQuill() {
     const [new_text, setNewText] = useState('');
     const [text, setText] = useState('<p>Starting text..</p>');
 
-
     let data = {
         _id: id,
         html: text
