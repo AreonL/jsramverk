@@ -10,8 +10,13 @@ function EditorReactQuill(props) {
         props.onChange(event)
     }
 
+    const keyUp = (event) => {
+        console.log();
+        props.onKeyUp(event)
+    }
+
     return (
-        <ReactQuill theme="snow" value={props.value} onChange={setText} />
+        <ReactQuill theme="snow" value={props.value} onChange={setText} onKeyUp={keyUp}/>
     );
 }
 

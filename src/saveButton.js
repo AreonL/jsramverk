@@ -1,7 +1,7 @@
 // import { response } from "express";
 import React from "react";
 
-const BASE_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/'
+const BASE_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document/'
 
 function SaveButton(props) {
 	// console.log(props.value, props.id, props.name);

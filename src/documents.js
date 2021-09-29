@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-// import { useAsync } from "react-use";
 
-// const API_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document';
-const API_URL = 'http://localhost:4000/document';
+const API_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document';
+// const API_URL = 'http://localhost:4000/document';
 
 function Document(props) {
-    // console.log("name", props.new_text);
     // const [name, setName] = useState('');
-    // console.log(value);
     const [res, setState] = useState([]);
     const [active, setActive] = useState('');
 
     // fetch('https://jsramverk-editor-arba20.azurewebsites.net/document')
-
-    // const yes = useAsync();
-
     // const getAll = async () => {
     //     const response = await fetch('https://jsramverk-editor-arba20.azurewebsites.net/document')
     //     const data = await response.json();
@@ -25,8 +19,6 @@ function Document(props) {
 
 
     const changeActive = (event) => {
-        // console.log("Change Active");
-        // console.log(event.target.value);
         setActive(event.target.value)
     }
 
@@ -49,7 +41,6 @@ function Document(props) {
         fetch(API_URL)
             .then(res => res.json())
             .then(data => {
-                // console.log(data.data);
                 setState(data.data);
             });
     }, [props.new_text])
