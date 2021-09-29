@@ -19,7 +19,7 @@ jest.mock("../reactQuill", () => {
 });
 
 // jest.mock('EditorReactQuill');
-const BASE_URL = "https://jsramverk-editor-arba20.azurewebsites.net"
+const BASE_URL = "https://jsramverk-editor-arba20.azurewebsites.net/document"
 let docs = {
     data: [
         { _id: "1", name: "Test1", text: "Some Text 1"},
