@@ -35,10 +35,10 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
+    // cleanup on exiting
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
 });
 
 test("should render save", async () => {
