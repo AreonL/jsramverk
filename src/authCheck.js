@@ -17,16 +17,17 @@ function AuthCheck() {
     // }, [])
 
     return (
-        [
-            console.log(token),
-            token.length > 0 ?
+        <div>
+            {console.log(token)}
+
+            {token.length > 0 ?
             <header className="App-header">
                 <EditorQuill token={token} onLogout={setToken}/>
             </header> :
             <header className="App-header">
                 <Auth onToken={setToken}/>
-            </header>
-        ]
+            </header>}
+        </div>
     );
 }
 
