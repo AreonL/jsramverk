@@ -11,7 +11,6 @@ function EditorReactQuill(props) {
     }
 
     const keyUp = (event) => {
-        console.log();
         props.onKeyUp(event)
     }
 

@@ -49,6 +49,7 @@ test("should render save", async () => {
 
     // Sets docs data text too how api would update
     const setNewText = jest.fn(e => docs.data[0].text = e);
+    const setId = jest.fn();
 
     // Data sending too api
     const data = { data: { name: name, text: text }};
@@ -66,7 +67,7 @@ test("should render save", async () => {
     await act(async () => {
         render(
             <div>
-                <SaveButton onSaveAs={setNewText} value={text} id={id} name={name}/>
+                <SaveButton onSaveAs={setNewText} setId={setId} value={text} id={id} name={name}/>
             </div>,
             container
         )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "./config";
 
-const API_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document';
 // const API_URL = 'http://localhost:4000/document';
 
 function Document(props) {
@@ -38,12 +38,17 @@ function Document(props) {
     }
 
     useEffect(() => {
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(data => {
-                setState(data.data);
-            });
-    }, [props.new_text])
+        fetch(API_URL, {
+            headers: {
+                'x-access-token': props.token
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data, "docs fetch");
+            setState(data.data);
+        });
+    }, [props.new_text, props.token])
 
     // if (!res) {
     //     return "laddar.....";
@@ -54,7 +59,7 @@ function Document(props) {
         <div>
             <select name="documents" value={active} onChange={changeActive} data-testid="selectDoc">
                 <option value="null">Documents</option>
-                {/* { console.log(res.length) } */}
+                {/* { console.log(res) } */}
                 {res.length > 0 ? res.map(e => (
                     <option data-testid={`options-${e._id}`} key={e._id} value={e._id}>{e.name}</option>
                 )) : <option value="null">Loading..</option>}

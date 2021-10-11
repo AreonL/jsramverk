@@ -3,6 +3,9 @@ import 'react-quill/dist/quill.snow.css';
 import SaveButton from "./saveButton";
 import Document from "./documents";
 import EditorReactQuill from "./reactQuill";
+import AllowUser from "./allowUser";
+import Logout from "./logout";
+
 // import moduleDocument from "../module/document";
 
 // Kmom04 - Sockets
@@ -12,7 +15,7 @@ const ENDPOINT = "https://jsramverk-editor-arba20.azurewebsites.net";
 const socket = socketIOClient(ENDPOINT);
 
 
-function EditorQuill() {
+function EditorQuill(props) {
     const [name, setName] = useState('');
     const [id, setId] = useState('');
     const [old_id, setOldId] = useState('');
@@ -54,9 +57,11 @@ function EditorQuill() {
 
     return (
         <div id="quillEditor" data-testid="test-all">
-            <Document onId={createAndSetId} onText={setText} onName={setName} new_text={new_text}/>
+            <Document onId={createAndSetId} onText={setText} onName={setName} new_text={new_text} token={props.token}/>
             <EditorReactQuill value={text} onChange={setText} onKeyUp={keyUp}/>
-            <SaveButton onSaveAs={setNewText} value={text} id={id} name={name}/>
+            <SaveButton onSaveAs={setNewText} setId={setId} value={text} id={id} name={name} token={props.token}/>
+            <AllowUser token={props.token} docId={id}/>
+            <Logout onLogout={props.onLogout}/>
         </div>
     );
 }

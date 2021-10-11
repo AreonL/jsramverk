@@ -1,14 +1,16 @@
 // import { response } from "express";
 import React from "react";
+import { API_URL } from "./config";
 
-const BASE_URL = 'https://jsramverk-editor-arba20.azurewebsites.net/document/'
+const BASE_URL = API_URL
 
 function SaveButton(props) {
 	// console.log(props.value, props.id, props.name);
 	const saveFetch = async (where, data) => {
-		await fetch(BASE_URL + where, {
+		return await fetch(BASE_URL + where, {
 			method: 'POST',
 			headers: {
+				'x-access-token': props.token,
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
@@ -28,9 +30,10 @@ function SaveButton(props) {
 			text: props.value
 		}
 
-		await saveFetch("create", data);
-
+		let val = await saveFetch("/create", data);
+		console.log(val);
 		props.onSaveAs(props.value);
+		props.setId(val.data.id);
 	}
     const saveLog = async () => {
 		const data = {
@@ -38,7 +41,7 @@ function SaveButton(props) {
 			text: props.value
 		}
 
-		await saveFetch("update", data);
+		await saveFetch("/update", data);
 
 		props.onSaveAs(props.value)
     }

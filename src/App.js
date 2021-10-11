@@ -1,13 +1,10 @@
 import './App.css';
-import EditorQuill from "./quill";
-
+import AuthCheck from "./authCheck";
 
 function App() {
     return (
         <div className="App">
-        <header className="App-header">
-            <EditorQuill />
-        </header>
+            <AuthCheck />
         </div>
     );
 }
