@@ -1,6 +1,6 @@
 // import { response } from "express";
 import React from "react";
-import { API_URL } from "./config";
+import { API_URL } from "../config";
 
 function AllowUser(props) {
 	const onAllow = async () => {

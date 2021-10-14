@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import 'react-quill/dist/quill.snow.css';
-import SaveButton from "./saveButton";
+import SaveButton from "./button/saveButton";
 import Document from "./documents";
 import EditorReactQuill from "./reactQuill";
 import AllowUser from "./allowUser";
-import Logout from "./logout";
+import Logout from "./button/logout";
 
 // import moduleDocument from "../module/document";
 
@@ -49,6 +49,7 @@ function EditorQuill(props) {
     socket.on("new_text", (new_text) => {
         setNewText(new_text)
     });
+
     // const setInfo = (document) => {
 	// 	setId(document._id);
     //     setText(document.text);
@@ -57,7 +58,7 @@ function EditorQuill(props) {
 
     return (
         <div id="quillEditor" data-testid="test-all">
-            <Document onId={createAndSetId} onText={setText} onName={setName} new_text={new_text} token={props.token}/>
+            <Document onId={createAndSetId} email={props.email} onText={setText} onName={setName} new_text={new_text} token={props.token}/>
             <EditorReactQuill value={text} onChange={setText} onKeyUp={keyUp}/>
             <SaveButton onSaveAs={setNewText} setId={setId} value={text} id={id} name={name} token={props.token}/>
             <AllowUser token={props.token} docId={id}/>

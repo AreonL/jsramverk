@@ -1,5 +1,5 @@
 import './App.css';
-import AuthCheck from "./authCheck";
+import AuthCheck from "./components/auth/authCheck";
 
 function App() {
     return (

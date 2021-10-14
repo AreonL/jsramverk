@@ -2,13 +2,13 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act, Simulate } from "react-dom/test-utils";
 
-import MockedEditorReactQuill from '../reactQuill';
+import MockedEditorReactQuill from '../components/reactQuill';
 
-import Document from "../documents";
-import EditorReactQuill from "../reactQuill";
-import SaveButton from "../saveButton";
+import Document from "../components/documents";
+import EditorReactQuill from "../components/reactQuill";
+import SaveButton from "../components/button/saveButton";
 
-jest.mock("../reactQuill", () => {
+jest.mock("../components/reactQuill", () => {
     return function DummyQuill(props) {
         return (
             <div data-testid="quill">

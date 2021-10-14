@@ -1,10 +1,11 @@
-import EditorQuill from "./quill";
+import EditorQuill from "../quill";
 import Auth from "./auth";
 import { useState } from 'react';
 // import { AUTH_URL } from './config';
 
 function AuthCheck() {
     const [token, setToken] = useState('');
+    const [email, setEmail] = useState('');
 
     // useEffect(() => {
     //     // console.log("useEffect");
@@ -22,10 +23,10 @@ function AuthCheck() {
 
             {token.length > 0 ?
             <header className="App-header">
-                <EditorQuill token={token} onLogout={setToken}/>
+                <EditorQuill token={token} onLogout={setToken} email={email}/>
             </header> :
             <header className="App-header">
-                <Auth onToken={setToken}/>
+                <Auth onToken={setToken} onEmail={setEmail}/>
             </header>}
         </div>
     );

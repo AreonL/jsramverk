@@ -1,14 +1,15 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act, Simulate } from "react-dom/test-utils";
+import { API_URL } from '../config';
 
-import MockedEditorReactQuill from '../reactQuill';
+import MockedEditorReactQuill from '../components/reactQuill';
 
-import Document from "../documents";
-import EditorReactQuill from "../reactQuill";
-import SaveButton from "../saveButton";
+import Document from "../components/documents";
+import EditorReactQuill from "../components/reactQuill";
+import SaveButton from "../components/button/saveButton";
 
-jest.mock("../reactQuill", () => {
+jest.mock("../components/reactQuill", () => {
     return function DummyQuill(props) {
         return (
             <div data-testid="quill">
@@ -19,7 +20,7 @@ jest.mock("../reactQuill", () => {
 });
 
 // jest.mock('EditorReactQuill');
-const BASE_URL = "https://jsramverk-editor-arba20.azurewebsites.net/document"
+
 let docs = {
     data: [
         { _id: "1", name: "Test1", text: "Some Text 1"},
@@ -79,7 +80,7 @@ test("should render save", async () => {
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(global.fetch).toHaveBeenCalledWith(
-        BASE_URL+'/update', {
+        API_URL+'/update', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data),

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_URL } from "./config";
+import { GRAPH_URL } from "../config";
 
 // const API_URL = 'http://localhost:4000/document';
 
@@ -38,17 +38,26 @@ function Document(props) {
     }
 
     useEffect(() => {
-        fetch(API_URL, {
+        console.log(props.token, props.email, "FETCHING HERE");
+        fetch(GRAPH_URL, {
+            method: 'POST',
             headers: {
-                'x-access-token': props.token
-            }
+                'x-access-token': props.token,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ query: '{ docs (email: "' + props.email + '") { name text _id } }' })
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data, "docs fetch");
-            setState(data.data);
+            console.log(data);
+            data = data.data.docs;
+
+            if (data != null) {
+                setState(data);
+            }
         });
-    }, [props.new_text, props.token])
+    }, [props.new_text, props.token, props.email])
 
     // if (!res) {
     //     return "laddar.....";
@@ -59,7 +68,7 @@ function Document(props) {
         <div>
             <select name="documents" value={active} onChange={changeActive} data-testid="selectDoc">
                 <option value="null">Documents</option>
-                {/* { console.log(res) } */}
+                { console.log(res) }
                 {res.length > 0 ? res.map(e => (
                     <option data-testid={`options-${e._id}`} key={e._id} value={e._id}>{e.name}</option>
                 )) : <option value="null">Loading..</option>}

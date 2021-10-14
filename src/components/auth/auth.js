@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AUTH_URL } from './config';
+import { AUTH_URL } from '../../config';
 
 function Auth(props) {
     const [email, setEmail] = useState('');
@@ -36,6 +36,7 @@ function Auth(props) {
             console.log(res.data, "logged in");
             props.onToken(res.data.token);
         }
+        props.onEmail(email);
         console.log(res, password);
     }
 
@@ -61,7 +62,7 @@ function Auth(props) {
                 props.onToken(res.data.token);
             }
         }
-
+        props.onEmail(email);
         console.log(res, password);
     }
 
