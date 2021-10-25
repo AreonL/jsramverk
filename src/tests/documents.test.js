@@ -73,7 +73,7 @@ test("should render editor", async () => {
             <div>
                 <Document onText={setText} onId={setId} onName={setName} new_text={new_text}/>
                 <EditorReactQuill value={text} onChange={onChange}/>
-                <SaveButton />
+                <SaveButton saveText={""} />
             </div>,
             container
         )

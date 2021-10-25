@@ -68,7 +68,7 @@ test("should render save", async () => {
     await act(async () => {
         render(
             <div>
-                <SaveButton onSaveAs={setNewText} setId={setId} value={text} id={id} name={name}/>
+                <SaveButton saveText={""} onSaveAs={setNewText} setId={setId} value={text} id={id} name={name}/>
             </div>,
             container
         )
