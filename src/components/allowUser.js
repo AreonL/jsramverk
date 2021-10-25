@@ -4,8 +4,8 @@ import { API_URL } from "../config";
 
 function AllowUser(props) {
 	const onAllow = async () => {
-		var addEmail = prompt("Spara som..")
-		if (addEmail.length === 0 || addEmail === null) {
+		var addEmail = prompt("Allow user:")
+		if (addEmail === null) {
 			return false;
 		}
 
@@ -27,9 +27,7 @@ function AllowUser(props) {
 	}
 
     return (
-		<div>
-			<button className="saveButton green" onClick={onAllow}>Add user</button>
-		</div>
+		<button className="saveButton green" onClick={onAllow}>Add user</button>
     );
 }
 

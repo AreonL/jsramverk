@@ -1,11 +1,13 @@
 import EditorQuill from "../quill";
 import Auth from "./auth";
 import { useState } from 'react';
+import EditorCode from "../codeEditor/codeEditor";
 // import { AUTH_URL } from './config';
 
 function AuthCheck() {
     const [token, setToken] = useState('');
     const [email, setEmail] = useState('');
+    const [code, setCode] = useState(false);
 
     // useEffect(() => {
     //     // console.log("useEffect");
@@ -19,12 +21,20 @@ function AuthCheck() {
 
     return (
         <div>
-            {console.log(token)}
+            {/* {console.log(token)} */}
 
             {token.length > 0 ?
-            <header className="App-header">
-                <EditorQuill token={token} onLogout={setToken} email={email}/>
-            </header> :
+            <div>
+                { code === true ?
+                <header className="App-header code-bg">
+                    <EditorCode onLogout={setToken} onCode={setCode} token={token}/>
+                </header>
+                :
+                <header className="App-header">
+                    <EditorQuill token={token} onLogout={setToken} onCode={setCode} email={email}/>
+                </header>
+                }
+            </div> :
             <header className="App-header">
                 <Auth onToken={setToken} onEmail={setEmail}/>
             </header>}
