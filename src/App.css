@@ -138,6 +138,10 @@
   position: fixed;
 }
 
+.comments div div:hover{
+  color: red;
+}
+
 .no-comments{
   float: right;
   margin-left: 67.5%;

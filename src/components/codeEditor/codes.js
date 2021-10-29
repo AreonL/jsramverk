@@ -6,7 +6,6 @@ import ExecuteCode from "./button/sendCode";
 export default function Codes(props) {
     const [codeData, setCodeData] = useState([]);
     const [active, setActive] = useState('');
-    const [name, setName] = useState('');
 
     const changeActive = (event) => {
         event.preventDefault();
@@ -15,9 +14,7 @@ export default function Codes(props) {
             return
         }
 
-        const theOne = codeData.find(e => e._id === id);
         setActive(id);
-        setName(theOne.name);
     }
 
     const submitChange = (event) => {
@@ -25,18 +22,17 @@ export default function Codes(props) {
         if (active === "null" || active === '') {
             return
         }
-        console.log(codeData);
+
         var theOne = codeData.filter(e => e._id === active)[0];
-        console.log(theOne);
 
         props.setId(theOne._id);
         props.setCode(theOne.code);
-        // props.onName(theOne.name);
-        // // props.onSelect(theOne);
     }
 
     useEffect(() => {
-        // console.log(props.token, props.email, "FETCHING HERE");
+        if (!props.token || !props.newCode) {
+            return false
+        }
         fetch(CODE_URL, {
             method: 'GET',
             headers: {
@@ -49,16 +45,10 @@ export default function Codes(props) {
         });
     }, [props.token, props.newCode])
 
-    // if (!res) {
-    //     return "laddar.....";
-    // }
-
-
     return (
         <div>
             <select name="codes" value={active} onChange={changeActive} data-testid="selectCode">
                 <option value="null">Codes</option>
-                {/* { console.log(res) } */}
                 {codeData.length > 0 ? codeData.map(e => (
                     <option data-testid={`options-${e._id}`} key={e._id} value={e._id}>{e.name}</option>
                 )) : <option value="null">Create code!</option>}

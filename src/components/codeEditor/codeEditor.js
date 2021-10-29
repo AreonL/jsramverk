@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MonacoEditor from 'react-monaco-editor';
 import Logout from "../button/logout";
 import EditorMode from "./button/editorButton";
@@ -9,6 +9,7 @@ function EditorCode(props) {
     const [code, setCode] = useState('// Start coding..');
     const [newCode, setNewCode] = useState('');
     const [id, setId] = useState('');
+    const [emil, setEm] = useState('');
     const options = {
         selectOnLineNumbers: false
     };
@@ -16,6 +17,13 @@ function EditorCode(props) {
     function onChange(newValue, e) {
         setCode(newValue);
     }
+
+    useEffect(() => {
+        if (props.onEmil === "emil") {
+            setEm(props.onEmil);
+            setCode('// Now make a editor in the editor :P')
+        }
+    }, [props.onEmil]);
 
     return (
         <div>
@@ -32,10 +40,12 @@ function EditorCode(props) {
                 />
             </div>
             <SaveCode code={code} id={id} token={props.token} setNewCode={setNewCode}/>
+            {emil.length > 0 ? <div>No changing back :) only code now</div> :
             <div>
                 <Logout onLogout={props.onLogout} onCode={props.onCode} token={props.token}/>
                 <EditorMode onCode={props.onCode} />
             </div>
+            }
         </div>
     );
 }

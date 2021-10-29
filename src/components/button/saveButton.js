@@ -1,10 +1,8 @@
-// import { response } from "express";
 import React, { useEffect } from "react";
-import Comments from "../comments";
+import Comments from "./comments";
 import { API_URL } from "../../config";
 
 export default function SaveButton(props) {
-	// console.log(props.value, props.id, props.name);
 	const saveFetch = async (where, data) => {
 		return await fetch(API_URL + where, {
 			method: 'POST',
@@ -20,7 +18,7 @@ export default function SaveButton(props) {
 
 	const saveAs = async () => {
 		var new_name = prompt("Spara som..")
-		// console.log("New Name:", new_name);
+
 		if (new_name.length === 0) {
 			return
 		}
@@ -32,7 +30,6 @@ export default function SaveButton(props) {
 		}
 
 		let val = await saveFetch("/create", data);
-		//console.log(val);
 		props.onSaveAs(props.value);
 		props.setId(val.data.id);
 	}
@@ -59,13 +56,6 @@ export default function SaveButton(props) {
 
 		await saveFetch("/update", data);
 
-		// splice(index, delete, item)
-		// let comments = props.comment
-		// console.log(comments);
-		// comments.splice(index, 0, {"_id": commentId, "text": comment})
-		// console.log(comments);
-
-
 		props.onSaveAs(text)
 		props.setText(text)
     }
@@ -76,7 +66,7 @@ export default function SaveButton(props) {
 			console.log("Saving soon");
 			updateCommentText(values)
 		}
-	}, [props.saveText])
+	}, [props.saveText]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
 		<div>

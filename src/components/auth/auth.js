@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AUTH_URL } from '../../config';
-// import { useQuery } from 'react-query';
-
-
-
-// function useQuery() {
-//     return new URLSearchParams(useLocation().search);
-// }
 
 function Auth(props) {
-    const [email, setEmail] = useState('t');
-    const [password, setPassword] = useState('t');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const search = window.location.search;
     let url = new URLSearchParams(search);
     const params = url.get("regEmail");
@@ -20,9 +13,6 @@ function Auth(props) {
             setEmail(params)
         }
     }, [params])
-    // const setText = (event) => {
-    //     props.onChange(event)
-    // }
 
     const authFetch = async (where, data) => {
 		return await fetch(AUTH_URL + where, {
@@ -37,49 +27,40 @@ function Auth(props) {
 	}
 
     const onLogin = async () => {
-        //console.log("Eyo");
         const data = {
             email: email,
             password: password
         }
 
         let res = await authFetch("/login", data);
-        // .then(data => data.da)
 
+        if (!res) {
+            return false
+        }
         if (res.hasOwnProperty("data")) {
-            //console.log(res.data, "logged in");
             props.onToken(res.data.token);
         }
         props.onEmail(email);
-        // window.location.href = "http://localhost:3000"
-        //console.log(res, password, email);
     }
 
     const onRegister = async () => {
-        //console.log("Eyo2");
         const data = {
             email: email,
             password: password
         }
         let res = await authFetch("/register", data);
 
-
         if (res.hasOwnProperty("data")) {
-            //console.log(res.data.message);
             res = await authFetch("/login", data);
-            //console.log(res, "Logged in with registy");
             props.onToken(res.data.token);
         } else {
-            //console.log(res);
             if (res.errors.title === "Email already registered") {
                 res = await authFetch("/login", data);
-                //console.log(res, "Logged in, already registered");
                 props.onToken(res.data.token);
             }
         }
         props.onEmail(email);
         url.delete('regEmail')
-        //console.log(res, password);
     }
 
     return (
@@ -88,7 +69,7 @@ function Auth(props) {
             <label>Email:</label>
             <input type="email" value={email} onInput={e => setEmail(e.target.value.toLowerCase())}></input>
             <label>Password:</label>
-            <input type="text" value={email} onInput={e => setPassword(e.target.value)}></input>
+            <input type="text" value={password} onInput={e => setPassword(e.target.value)}></input>
             <button className="authButton blue" onClick={onLogin}>Login</button>
             <button className="authButton not-blue" onClick={onRegister}>Register</button>
         </div>
